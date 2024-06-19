@@ -3,10 +3,7 @@ package dev.elfa.rickmortyapi.controller;
 import dev.elfa.rickmortyapi.model.RickMortyCharacter;
 import dev.elfa.rickmortyapi.service.RickMortyService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,6 +18,12 @@ public class RickMortyController {
     @GetMapping("/characters")
     public List<RickMortyCharacter> getAllCharacters() throws IOException {
         return service.getAllRickMortyCharacters();
+    }
+
+    // Passing Data
+    @GetMapping("/character")
+    public List<RickMortyCharacter> getAllCharactersByStatus(@RequestParam String status) throws IOException {
+        return service.getAllRickMortyCharactersByStatus(status);
     }
 
     // Searching by ID

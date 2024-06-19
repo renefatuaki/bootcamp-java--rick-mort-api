@@ -27,6 +27,19 @@ public class RickMortyService {
         }
     }
 
+    public List<RickMortyCharacter> getAllRickMortyCharactersByStatus(String status) throws IOException {
+        RickMortyResponse response = client.get()
+                .uri("/character/?status=" + status)
+                .retrieve()
+                .body(RickMortyResponse.class);
+
+        if (response != null) {
+            return response.results();
+        } else {
+            throw new IOException("No data found.");
+        }
+    }
+
     public RickMortyCharacter getRickMortyCharacter(String id) throws IOException {
         RickMortyCharacter response = client.get()
                 .uri("/character/" + id)
