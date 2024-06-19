@@ -16,14 +16,13 @@ public class RickMortyController {
 
     // Passing Data
     @GetMapping("/characters")
-    public List<RickMortyCharacter> getAllCharacters() throws IOException {
-        return service.getAllRickMortyCharacters();
-    }
-
-    // Passing Data
-    @GetMapping("/character")
-    public List<RickMortyCharacter> getAllCharactersByStatus(@RequestParam String status) throws IOException {
-        return service.getAllRickMortyCharactersByStatus(status);
+    public List<RickMortyCharacter> getAllCharacters(@RequestParam(required = false) String status) throws IOException {
+        if (status != null) {
+            // Filtering
+            return service.getAllRickMortyCharactersByStatus(status);
+        } else {
+            return service.getAllRickMortyCharacters();
+        }
     }
 
     // Searching by ID
