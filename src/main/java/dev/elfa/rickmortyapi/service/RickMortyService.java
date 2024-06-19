@@ -2,6 +2,7 @@ package dev.elfa.rickmortyapi.service;
 
 import dev.elfa.rickmortyapi.model.RickMortyCharacter;
 import dev.elfa.rickmortyapi.model.RickMortyResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -10,9 +11,13 @@ import java.util.List;
 
 @Service
 public class RickMortyService {
-    private final RestClient client = RestClient.builder()
-            .baseUrl("https://rickandmortyapi.com/api")
-            .build();
+    private final RestClient client;
+
+    public RickMortyService(@Value("${RICK_URL}") String baseUrl) {
+        this.client = RestClient.builder()
+                .baseUrl(baseUrl)
+                .build();
+    }
 
     public List<RickMortyCharacter> getAllRickMortyCharacters() throws IOException {
         RickMortyResponse response = client.get()
