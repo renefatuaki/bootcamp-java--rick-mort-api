@@ -60,7 +60,7 @@ public class RickMortyService {
                 .body(RickMortyResponse.class);
 
         if (response != null) {
-            return response.results().size();
+            return response.info().count();
         } else {
             throw new IOException("No data found.");
         }
