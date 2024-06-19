@@ -31,4 +31,10 @@ public class RickMortyController {
     public RickMortyCharacter getCharacter(@PathVariable String id) throws IOException {
         return service.getRickMortyCharacter(id);
     }
+
+    // Statistics
+    @GetMapping("/species-statistic")
+    public int getNumberOfSpecies(@RequestParam String species) throws IOException {
+        return service.getNumberOfSpecies(species);
+    }
 }

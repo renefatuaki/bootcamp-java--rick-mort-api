@@ -52,4 +52,17 @@ public class RickMortyService {
             throw new IOException("No data found.");
         }
     }
+
+    public int getNumberOfSpecies(String species) throws IOException {
+        RickMortyResponse response = client.get()
+                .uri("/character/?species=" + species)
+                .retrieve()
+                .body(RickMortyResponse.class);
+
+        if (response != null) {
+            return response.results().size();
+        } else {
+            throw new IOException("No data found.");
+        }
+    }
 }
